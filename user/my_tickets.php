@@ -35,8 +35,8 @@ $result = $conn->query($sql);
     <div class="card">
       <h1>Tiket Saya</h1>
       <p class="subtitle">Lihat daftar tiket yang pernah Anda buat dan statusnya.</p>
-      <div class="table-wrap">
-        <table>
+      <div class="table-container">
+        <table class="content-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -53,7 +53,7 @@ $result = $conn->query($sql);
               <td><?php echo htmlspecialchars($row['subject']); ?></td>
               <td><span class="badge badge-<?php echo $row['status']; ?>"><?php echo ucfirst($row['status']); ?></span></td>
               <td><?php echo date('d M Y, H:i', strtotime($row['created_at'])); ?></td>
-              <td class="actions"><a href="view_ticket.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-eye"></i> Lihat</a></td>
+              <td class="actions"><a href="view_ticket.php?id=<?php echo $row['id']; ?>" class="btn btn-outline"><i class="fa-solid fa-eye"></i> Lihat</a></td>
             </tr>
           <?php endwhile; ?>
           </tbody>

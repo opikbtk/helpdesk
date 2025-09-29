@@ -72,44 +72,56 @@ if (isset($_GET["id"])) {
   </div>
 
   <div class="container">
+    <nav class="breadcrumb"><a href="my_tickets.php"><i class="fa-solid fa-list"></i> Tiket Saya</a> <span>/</span> <span>#<?php echo $ticket['id']; ?></span></nav>
+
     <div class="card">
       <h1><?php echo htmlspecialchars($ticket['subject']); ?></h1>
       <p class="subtitle">Detail tiket dan percakapan.</p>
+      <div class="meta-grid">
+        <div><span class="chip">Status</span> <span class="badge badge-<?php echo $ticket['status']; ?>"><?php echo ucfirst($ticket['status']); ?></span></div>
+        <div><span class="chip">Dibuat</span> <?php echo date('d M Y, H:i', strtotime($ticket['created_at'])); ?></div>
+      </div>
       <div class="detail">
-        <p><strong>Status:</strong> <span class="badge badge-<?php echo $ticket['status']; ?>"><?php echo ucfirst($ticket['status']); ?></span></p>
-        <p><strong>Dibuat oleh:</strong> <?php echo htmlspecialchars(get_user_name($conn, $ticket['user_id'])); ?> pada <?php echo date('d M Y, H:i', strtotime($ticket['created_at'])); ?></p>
         <p><?php echo nl2br(htmlspecialchars($ticket['description'])); ?></p>
       </div>
     </div>
 
     <div class="card">
-      <h2>Balasan</h2>
+      <h2><i class="fa-solid fa-comments"></i> Balasan</h2>
+      <div class="replies">
       <?php if ($replies_result->num_rows > 0): ?>
         <?php while ($reply = $replies_result->fetch_assoc()): ?>
-          <div class="reply">
-            <div class="meta"><strong><?php echo htmlspecialchars($reply['nama_pengirim']); ?></strong> · <?php echo date('d M Y, H:i', strtotime($reply['created_at'])); ?></div>
-            <div class="message"><?php echo nl2br(htmlspecialchars($reply['message'])); ?></div>
+          <div class="reply-item">
+            <div class="reply-dot"></div>
+            <div class="reply-content">
+              <div class="meta"><strong><?php echo htmlspecialchars($reply['nama_pengirim']); ?></strong> · <?php echo date('d M Y, H:i', strtotime($reply['created_at'])); ?></div>
+              <div class="message"><?php echo nl2br(htmlspecialchars($reply['message'])); ?></div>
+            </div>
           </div>
         <?php endwhile; ?>
       <?php else: ?>
         <p class="subtitle">Belum ada balasan pada tiket ini.</p>
       <?php endif; ?>
+      </div>
     </div>
 
     <div class="card">
-      <h2>Tambahkan Balasan</h2>
+      <h2><i class="fa-solid fa-pen-to-square"></i> Tambahkan Balasan</h2>
       <?php if ($ticket['status'] === 'closed'): ?>
         <p class="subtitle">Tiket ini sudah ditutup. Anda tidak bisa menambahkan balasan.</p>
       <?php else: ?>
         <?php if (isset($error)): ?>
-          <p class="subtitle" style="color:#b91c1c;"><?php echo htmlspecialchars($error); ?></p>
+          <p class="subtitle" style="color:#b91c1c;">&nbsp;<?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $ticket_id); ?>">
           <div class="form-group">
             <label for="message">Pesan</label>
-            <textarea id="message" name="message"></textarea>
+            <textarea id="message" name="message" placeholder="Tulis balasan Anda..."></textarea>
           </div>
-          <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Kirim</button>
+          <div class="form-actions">
+            <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Kirim</button>
+            <a href="my_tickets.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Kembali</a>
+          </div>
         </form>
       <?php endif; ?>
     </div>

@@ -61,7 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <label for="description">Deskripsi</label>
           <textarea id="description" name="description" required></textarea>
         </div>
-        <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+        <div class="form-actions">
+          <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+          <a href="my_tickets.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Tiket Saya</a>
+        </div>
       </form>
     </div>
   </div>
