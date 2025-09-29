@@ -47,6 +47,20 @@ Helpdesk sederhana berbasis PHP (MySQL) untuk pengelolaan tiket dukungan dengan 
 - Disarankan menggunakan prepared statements untuk semua query (sebagian sudah, sebagian masih plain). Lanjutkan migrasi untuk cegah SQL injection.
 - Lakukan hard refresh (Ctrl+F5) jika perubahan CSS tidak muncul.
 
+## Tangkapan Layar
+
+- Admin Dashboard
+  
+  ![Admin Dashboard](docs/screenshots/admin-dashboard.svg)
+
+- User Dashboard
+  
+  ![User Dashboard](docs/screenshots/user-dashboard.svg)
+
+- Support View Ticket
+  
+  ![Support View Ticket](docs/screenshots/support-ticket.svg)
+
 ## Roadmap
 - Pagination dan pencarian/penyaringan tiket (status/keyword)
 - Dashboard chart ringkas (Chart.js)
