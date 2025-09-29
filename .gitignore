@@ -1,0 +1,19 @@
+# Dependencies & OS
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Credentials & local-only files
+includes/database.php
+Login.txt
+helpdesk.sql
+.env*
+
+# Cache/temp
+cache/
+temp/
