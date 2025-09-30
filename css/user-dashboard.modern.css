@@ -43,6 +43,7 @@
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
+  min-height: 100vh; /* ensure wrapper paints full viewport so theme covers entire page */
 }
 
 /* Topbar */
