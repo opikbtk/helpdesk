@@ -90,6 +90,9 @@ $result_recent = $conn->query("SELECT * FROM tickets WHERE user_id = $user_id OR
       </div>
     </div>
   </div>
+
+  
+
   <script>
     function toggleTheme(){
       const html = document.documentElement;

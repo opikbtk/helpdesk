@@ -5,12 +5,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-   // GANTI KODE LAMA DENGAN INI
-$stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-// SELESAI MENGGANTI
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -39,6 +37,7 @@ $result = $stmt->get_result();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -51,6 +50,7 @@ $result = $stmt->get_result();
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -60,6 +60,7 @@ $result = $stmt->get_result();
             width: 100%;
             max-width: 450px;
             animation: slideUp 0.6s ease-out;
+            margin-bottom: 20px;
         }
 
         @keyframes slideUp {
@@ -262,6 +263,50 @@ $result = $stmt->get_result();
             color: #764ba2;
         }
 
+        /* Footer Styling */
+        .login-footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 18px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .footer-members p {
+            margin: 0;
+        }
+
+        .footer-copyright {
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
         @media (max-width: 480px) {
             .login-card {
                 padding: 30px 25px;
@@ -280,6 +325,15 @@ $result = $stmt->get_result();
                 width: 30px;
                 height: 30px;
             }
+
+            .login-footer {
+                padding: 15px 20px;
+            }
+
+            .footer-members {
+                font-size: 12px;
+                gap: 5px 12px;
+            }
         }
     </style>
 </head>
@@ -297,12 +351,11 @@ $result = $stmt->get_result();
             </div>
 
             <form method="post" action="">
-                <!-- Tampilkan error jika ada -->
-                <!-- <?php if (isset($error)): ?> -->
-                <div class="error-message" style="display: none;">
-                    Username atau password salah
+                <?php if (isset($error)): ?>
+                <div class="error-message">
+                    <?php echo $error; ?>
                 </div>
-                <!-- <?php endif; ?> -->
+                <?php endif; ?>
 
                 <div class="input-group">
                     <label for="username">Username</label>
@@ -341,6 +394,21 @@ $result = $stmt->get_result();
         </div>
     </div>
 
+    <footer class="login-footer">
+        <div class="footer-group-title">
+            <i class="fa-solid fa-users"></i> Kelompok 1
+        </div>
+        <div class="footer-members">
+            <p>• Mohamad Taufik Wibowo</p>
+            <p>• Fabian Jason Song</p>
+            <p>• Ridwan Abdillah</p>
+            <p>• Reiksa Azra Octavian</p>
+        </div>
+        <div class="footer-copyright">
+            &copy; <?php echo date('Y'); ?> Helpdesk System. Didesain dengan <i class="fa-solid fa-heart" style="color: #ef4444;"></i>
+        </div>
+    </footer>
+
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');
@@ -367,6 +435,5 @@ $result = $stmt->get_result();
             });
         });
     </script>
-    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

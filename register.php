@@ -3,7 +3,7 @@ include 'includes/database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash password
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $nama = $_POST["nama"];
     $email = $_POST["email"];
 
@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Register - Helpdesk System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -36,10 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -50,11 +51,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 450px;
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .register-container::before {
@@ -73,14 +87,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .register-header h1 {
-            color: #333;
+            color: #2d3748;
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
         }
 
         .register-header p {
-            color: #666;
+            color: #718096;
             font-size: 14px;
             font-weight: 400;
         }
@@ -93,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: #4a5568;
             font-weight: 500;
             font-size: 14px;
         }
@@ -107,48 +121,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
+            color: #a0aec0;
             font-size: 16px;
         }
 
         .form-control {
             width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 2px solid #e0e6ed;
+            padding: 14px 16px 14px 45px;
+            border: 2px solid #e2e8f0;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
-            background-color: #fff;
+            background: #f7fafc;
         }
 
         .form-control:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
 
         .form-control::placeholder {
-            color: #999;
+            color: #a0aec0;
         }
 
         .btn-register {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
         }
 
         .btn-register:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
         .btn-register:active {
@@ -159,11 +178,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             text-align: center;
             margin-top: 25px;
             padding-top: 20px;
-            border-top: 1px solid #e0e6ed;
+            border-top: 1px solid #e2e8f0;
         }
 
         .login-link p {
-            color: #666;
+            color: #718096;
             font-size: 14px;
         }
 
@@ -179,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .alert {
-            padding: 15px;
+            padding: 14px 16px;
             border-radius: 12px;
             margin-bottom: 20px;
             font-size: 14px;
@@ -190,15 +209,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .alert-success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
             color: #155724;
         }
 
         .alert-error {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+            background: #fee;
+            border: 2px solid #fc8181;
+            color: #c53030;
         }
 
         .loading {
@@ -223,11 +242,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             100% { transform: rotate(360deg); }
         }
 
+        /* Footer Styling */
+        .register-footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 18px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .footer-members p {
+            margin: 0;
+        }
+
+        .footer-copyright {
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
         /* Responsive Design */
         @media (max-width: 480px) {
             .register-container {
-                padding: 30px 20px;
-                margin: 10px;
+                padding: 30px 25px;
             }
 
             .register-header h1 {
@@ -235,29 +297,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             .form-control {
-                font-size: 16px; /* Prevent zoom on iOS */
+                font-size: 15px;
+            }
+
+            .register-footer {
+                padding: 15px 20px;
+            }
+
+            .footer-members {
+                font-size: 12px;
+                gap: 5px 12px;
             }
         }
 
         @media (max-width: 360px) {
             .register-container {
                 padding: 25px 15px;
-            }
-        }
-
-        /* Animation for form appearance */
-        .register-container {
-            animation: slideUp 0.6s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
     </style>
@@ -329,6 +384,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
+    <footer class="register-footer">
+        <div class="footer-group-title">
+            <i class="fa-solid fa-users"></i> Kelompok 1
+        </div>
+        <div class="footer-members">
+            <p>• Mohamad Taufik Wibowo</p>
+            <p>• Fabian Jason Song</p>
+            <p>• Ridwan Abdillah</p>
+            <p>• Reiksa Azra Octavian</p>
+        </div>
+        <div class="footer-copyright">
+            &copy; <?php echo date('Y'); ?> Helpdesk System. Didesain dengan <i class="fa-solid fa-heart" style="color: #ef4444;"></i>
+        </div>
+    </footer>
+
     <script>
         // Add loading animation on form submit
         document.getElementById('registerForm').addEventListener('submit', function() {
@@ -344,14 +414,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Add focus effects
         document.querySelectorAll('.form-control').forEach(input => {
             input.addEventListener('focus', function() {
-                this.parentElement.parentElement.classList.add('focused');
+                this.parentElement.style.transform = 'scale(1.01)';
             });
             
             input.addEventListener('blur', function() {
-                this.parentElement.parentElement.classList.remove('focused');
+                this.parentElement.style.transform = 'scale(1)';
             });
         });
     </script>
-    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
