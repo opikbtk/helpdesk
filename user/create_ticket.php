@@ -73,13 +73,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
   <script>
     function toggleTheme(){
-      const next = (document.documentElement.getAttribute('data-theme')==='dark')?'light':'dark';
-      document.documentElement.setAttribute('data-theme', next);
+      const html = document.documentElement;
+      const body = document.body;
+      const next = (html.getAttribute('data-theme')==='dark')?'light':'dark';
+      html.setAttribute('data-theme', next);
+      body.setAttribute('data-theme', next);
       localStorage.setItem('appTheme', next);
     }
     (function(){
       const saved = localStorage.getItem('appTheme');
-      if(saved) document.documentElement.setAttribute('data-theme', saved);
+      if(saved){
+        document.documentElement.setAttribute('data-theme', saved);
+        document.body.setAttribute('data-theme', saved);
+      }
     })();
   </script>
 </body>
