@@ -30,42 +30,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="../css/create_tiket.css">
+  <link rel="stylesheet" href="../css/user-dashboard.modern.css">
 </head>
 <body>
-  <div class="topbar">
-    <div class="brand"><i class="fa-solid fa-user"></i> Helpdesk User</div>
-    <nav>
-      <button type="button" class="btn btn-outline" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Tema</button>
-      <a href="my_tickets.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Tiket Saya</a>
-      <a href="index.php" class="btn btn-outline"><i class="fa-solid fa-home"></i> Dashboard</a>
-      <a href="../logout.php" class="btn btn-outline"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-    </nav>
-  </div>
+  <div class="user-dashboard">
+    <div class="topbar">
+      <div class="brand"><i class="fa-solid fa-user"></i> Helpdesk User</div>
+      <nav>
+        <button type="button" class="btn btn-outline" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Tema</button>
+        <a href="my_tickets.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Tiket Saya</a>
+        <a href="index.php" class="btn btn-outline"><i class="fa-solid fa-home"></i> Dashboard</a>
+        <a href="../logout.php" class="btn btn-outline"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+      </nav>
+    </div>
 
-  <div class="container">
-    <div class="card">
-      <h1>Buat Tiket Baru</h1>
-      <?php if (isset($error)): ?>
-        <div class="alert alert-error"><i class="fa-solid fa-triangle-exclamation"></i> <?php echo htmlspecialchars($error); ?></div>
-      <?php endif; ?>
-      <?php if (isset($success)): ?>
-        <div class="alert alert-success"><i class="fa-solid fa-check-circle"></i> <?php echo htmlspecialchars($success); ?></div>
-      <?php endif; ?>
+    <div class="container">
+      <div class="card">
+        <h1>Buat Tiket Baru</h1>
+        <?php if (isset($error)): ?>
+          <div class="alert alert-error"><i class="fa-solid fa-triangle-exclamation"></i> <?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+        <?php if (isset($success)): ?>
+          <div class="alert alert-success"><i class="fa-solid fa-check-circle"></i> <?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
 
-      <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <div class="form-group">
-          <label for="subject">Subjek</label>
-          <input type="text" id="subject" name="subject" required>
-        </div>
-        <div class="form-group">
-          <label for="description">Deskripsi</label>
-          <textarea id="description" name="description" required></textarea>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
-          <a href="my_tickets.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Tiket Saya</a>
-        </div>
-      </form>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          <div class="form-group">
+            <label for="subject">Subjek</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Deskripsi</label>
+            <textarea id="description" name="description" required></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+            <a href="my_tickets.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Tiket Saya</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <script>
