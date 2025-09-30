@@ -233,6 +233,7 @@ if (isset($_GET["id"])) {
           if(saved) document.documentElement.setAttribute('data-theme', saved);
         })();
       </script>
+      <?php include '../includes/footer.php'; ?>
     </body>
     </html>
 

@@ -76,5 +76,6 @@ $result = $conn->query($sql);
       if(saved) document.documentElement.setAttribute('data-theme', saved);
     })();
   </script>
+  <?php include '../includes/footer.php'; ?>
 </body>
 </html>

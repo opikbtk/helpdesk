@@ -1,5 +1,18 @@
 </div> <footer class="footer">
-                <p>&copy; <?php echo date('Y'); ?> Helpdesk System. Didesain dengan ❤️.</p>
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: 600; font-size: 15px; color: var(--dark-color); margin-bottom: 10px;">
+                        <i class="fa-solid fa-users"></i> Kelompok 1
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; max-width: 900px; margin: 0 auto;">
+                        <p style="margin: 0;">• Mohamad Taufik Wibowo</p>
+                        <p style="margin: 0;">• Fabian Jason Song</p>
+                        <p style="margin: 0;">• Ridwan Abdillah</p>
+                        <p style="margin: 0;">• Reiksa Azra Octavian</p>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                    &copy; <?php echo date('Y'); ?> Helpdesk System. Didesain dengan <i class="fa-solid fa-heart" style="color: #ef4444;"></i>
+                </p>
             </footer>
         </main>
     </div>

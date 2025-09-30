@@ -107,5 +107,6 @@ $result_recent = $conn->query("SELECT * FROM tickets WHERE user_id = $user_id OR
       }
     })();
   </script>
+  <?php include '../includes/footer.php'; ?>
 </body>
 </html>
