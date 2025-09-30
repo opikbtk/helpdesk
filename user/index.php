@@ -23,9 +23,11 @@ $result_recent = $conn->query("SELECT * FROM tickets WHERE user_id = $user_id OR
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="../css/users.css">
-  <!-- Modern scoped styles for user dashboard -->
+    <!-- Modern scoped styles for user dashboard -->
   <link rel="stylesheet" href="../css/user-dashboard.modern.css">
+  <link rel="stylesheet" href="../css/dashboard-dark-fix.css">
+  <!-- <link rel="stylesheet" href="../css/users.css"> -->
+
 </head>
 <body>
   <div class="user-dashboard">

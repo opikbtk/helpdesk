@@ -160,3 +160,27 @@
   .user-dashboard .btn {padding:.5rem .75rem; font-size:.8rem}
   .user-dashboard .card h1 {font-size: 1.25rem}
 }
+
+
+/* Dark theme untuk topbar */
+[data-theme="dark"] .user-dashboard .topbar {
+  background-color: #16213e !important; /* atau #1a1a2e */
+  border-bottom-color: #0f3460 !important;
+}
+
+[data-theme="dark"] .user-dashboard .topbar .brand {
+  color: #eee !important;
+}
+
+[data-theme="dark"] .user-dashboard .topbar .btn {
+  color: #eee !important;
+  border-color: #0f3460 !important;
+}
+
+[data-theme="dark"] .user-dashboard .topbar .btn:hover {
+  background-color: #0f3460 !important;
+}
+
+[data-theme="dark"] .user-dashboard .topbar .btn:not(.btn-outline) {
+  background-color: #3498db !important;
+}

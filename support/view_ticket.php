@@ -44,8 +44,6 @@ if (isset($_GET["id"])) {
         exit();
     }
 
-    // --- Kode untuk menampilkan data tiket dipindahkan ke dalam blok if ---
-
     ?>
 
     <!DOCTYPE html>
@@ -53,78 +51,172 @@ if (isset($_GET["id"])) {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Lihat Tiket (Support)</title>
+      <title>Tiket #<?php echo $ticket['id']; ?> - Helpdesk Support</title>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-      <link rel="stylesheet" href="../css/support.css">
+      <link rel="stylesheet" href="../css/support-modern.css">
     </head>
     <body>
+      <!-- Topbar -->
       <div class="topbar">
-        <div class="brand"><i class="fa-solid fa-headset"></i> Helpdesk Support</div>
+        <div class="brand">
+          <i class="fa-solid fa-headset"></i> Helpdesk Support
+        </div>
         <nav>
-          <button type="button" class="btn btn-outline" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Tema</button>
-          <a href="index.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Daftar Tiket</a>
-          <a href="../logout.php" class="btn btn-outline"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          <button type="button" class="btn btn-outline" onclick="toggleTheme()">
+            <i class="fa-solid fa-moon"></i> <span>Tema</span>
+          </button>
+          <a href="index.php" class="btn btn-outline">
+            <i class="fa-solid fa-list"></i> <span>Daftar Tiket</span>
+          </a>
+          <a href="../logout.php" class="btn btn-outline">
+            <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+          </a>
         </nav>
       </div>
 
       <div class="container">
-        <nav class="breadcrumb"><a href="index.php"><i class="fa-solid fa-list"></i> Daftar Tiket</a> <span>/</span> <span>#<?php echo $ticket['id']; ?></span></nav>
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+          <a href="index.php">
+            <i class="fa-solid fa-list"></i> Daftar Tiket
+          </a> 
+          <span>/</span> 
+          <span>Tiket #<?php echo $ticket['id']; ?></span>
+        </nav>
 
+        <!-- Ticket Detail Card -->
         <div class="card">
-          <h1><?php echo htmlspecialchars($ticket['subject']); ?></h1>
-          <p class="subtitle">Detail tiket dan percakapan.</p>
-          <div class="meta-grid">
-            <div><span class="chip">Status</span> <span class="badge badge-<?php echo $ticket['status']; ?>"><?php echo ucfirst($ticket['status']); ?></span></div>
-            <div><span class="chip">User</span> <?php echo htmlspecialchars($ticket['nama_user']); ?></div>
-            <div><span class="chip">Dibuat</span> <?php echo date('d M Y, H:i', strtotime($ticket['created_at'])); ?></div>
+          <div class="ticket-header">
+            <h1><?php echo htmlspecialchars($ticket['subject']); ?></h1>
+            <p class="subtitle">Detail tiket dan percakapan dengan pengguna.</p>
           </div>
-          <div class="detail">
+          
+          <!-- Status Grid -->
+          <div class="status-grid">
+            <div class="status-item">
+              <div class="label">
+                <i class="fa-solid fa-tag"></i> Status
+              </div>
+              <div class="value">
+                <span class="badge badge-<?php echo $ticket['status']; ?>">
+                  <?php echo ucfirst($ticket['status']); ?>
+                </span>
+              </div>
+            </div>
+            <div class="status-item">
+              <div class="label">
+                <i class="fa-solid fa-user"></i> User
+              </div>
+              <div class="value">
+                <?php echo htmlspecialchars($ticket['nama_user']); ?>
+              </div>
+            </div>
+            <div class="status-item">
+              <div class="label">
+                <i class="fa-solid fa-calendar"></i> Dibuat
+              </div>
+              <div class="value">
+                <?php echo date('d M Y, H:i', strtotime($ticket['created_at'])); ?>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Description -->
+          <div class="ticket-description">
+            <strong style="display: block; margin-bottom: 8px; color: var(--primary);">
+              <i class="fa-solid fa-file-lines"></i> Deskripsi:
+            </strong>
             <p><?php echo nl2br(htmlspecialchars($ticket['description'])); ?></p>
           </div>
         </div>
 
+        <!-- Replies Card -->
         <div class="card">
-          <h2><i class="fa-solid fa-comments"></i> Balasan</h2>
-          <div class="replies">
-          <?php if ($replies_result->num_rows > 0): ?>
-            <?php while ($reply = $replies_result->fetch_assoc()): ?>
-              <div class="reply-item">
-                <div class="reply-dot"></div>
-                <div class="reply-content">
-                  <div class="meta"><strong><?php echo htmlspecialchars($reply['nama_pengirim']); ?></strong> · <?php echo date('d M Y, H:i', strtotime($reply['created_at'])); ?></div>
-                  <div class="message"><?php echo nl2br(htmlspecialchars($reply['message'])); ?></div>
-                </div>
+          <div class="replies-header">
+            <h2><i class="fa-solid fa-comments"></i> Balasan</h2>
+            <?php if ($replies_result->num_rows > 0): ?>
+              <span class="replies-count"><?php echo $replies_result->num_rows; ?></span>
+            <?php endif; ?>
+          </div>
+          
+          <div class="replies-container">
+            <?php if ($replies_result->num_rows > 0): ?>
+              <div class="replies">
+                <?php while ($reply = $replies_result->fetch_assoc()): ?>
+                  <div class="reply-item">
+                    <div class="reply-dot"></div>
+                    <div class="reply-content">
+                      <div class="meta">
+                        <strong><?php echo htmlspecialchars($reply['nama_pengirim']); ?></strong> 
+                        · 
+                        <i class="fa-solid fa-clock"></i>
+                        <?php echo date('d M Y, H:i', strtotime($reply['created_at'])); ?>
+                      </div>
+                      <div class="message">
+                        <?php echo nl2br(htmlspecialchars($reply['message'])); ?>
+                      </div>
+                    </div>
+                  </div>
+                <?php endwhile; ?>
               </div>
-            <?php endwhile; ?>
-          <?php else: ?>
-            <p class="subtitle">Belum ada balasan pada tiket ini.</p>
-          <?php endif; ?>
+            <?php else: ?>
+              <div class="empty-state">
+                <i class="fa-solid fa-inbox"></i>
+                <p>Belum ada balasan pada tiket ini.</p>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
 
-        <div class="card">
+        <!-- Action Card -->
+        <div class="card action-card">
           <h2><i class="fa-solid fa-pen-to-square"></i> Tindakan</h2>
+          <p class="subtitle">Update status tiket dan tambahkan balasan.</p>
+          
           <form class="action-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $ticket_id); ?>">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="status">Status</label>
+            <div class="form-grid">
+              <!-- Status Field -->
+              <div class="form-field">
+                <label for="status">
+                  <i class="fa-solid fa-tag"></i> Status Tiket
+                </label>
                 <select id="status" name="status">
-                  <option value="open" <?php if ($ticket['status'] == 'open') echo 'selected'; ?>>Open</option>
-                  <option value="pending" <?php if ($ticket['status'] == 'pending') echo 'selected'; ?>>Pending</option>
-                  <option value="closed" <?php if ($ticket['status'] == 'closed') echo 'selected'; ?>>Closed</option>
+                  <option value="open" <?php if ($ticket['status'] == 'open') echo 'selected'; ?>>
+                    Open - Menunggu Tindakan
+                  </option>
+                  <option value="pending" <?php if ($ticket['status'] == 'pending') echo 'selected'; ?>>
+                    Pending - Sedang Diproses
+                  </option>
+                  <option value="closed" <?php if ($ticket['status'] == 'closed') echo 'selected'; ?>>
+                    Closed - Selesai
+                  </option>
                 </select>
               </div>
-              <div class="form-group full">
-                <label for="message">Pesan</label>
-                <textarea id="message" name="message" placeholder="Tambahkan catatan atau balasan..."></textarea>
+              
+              <!-- Message Field -->
+              <div class="form-field">
+                <label for="message">
+                  <i class="fa-solid fa-message"></i> Pesan Balasan
+                </label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  placeholder="Tambahkan catatan atau balasan untuk pengguna..."
+                ></textarea>
               </div>
             </div>
-            <div class="form-actions">
-              <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
-              <a href="index.php" class="btn btn-outline"><i class="fa-solid fa-list"></i> Kembali</a>
+            
+            <!-- Action Buttons -->
+            <div class="btn-group" style="margin-top: 20px;">
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane"></i> Submit Balasan
+              </button>
+              <a href="index.php" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar
+              </a>
             </div>
           </form>
         </div>

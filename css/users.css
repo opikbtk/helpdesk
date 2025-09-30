@@ -29,6 +29,8 @@ h1{font-size:24px;margin-bottom:6px;color:var(--text)}
 .btn-outline{background:var(--card);color:var(--text);border:1px solid var(--border)}
 .btn-outline:hover{border-color:#cbd5e1}
 
+
+
 /* Grid quick actions */
 .actions{display:flex;gap:12px;flex-wrap:wrap}
 
@@ -59,3 +61,5 @@ h1{font-size:24px;margin-bottom:6px;color:var(--text)}
   .topbar{padding:10px 14px}
   .actions{flex-direction:column}
 }
+
+
