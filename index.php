@@ -378,7 +378,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="forgot-password">
-                    <a href="#">Lupa password?</a>
+                    <a href="forgot_password.php">Lupa password?</a>
                 </div>
 
                 <button type="submit">Masuk</button>

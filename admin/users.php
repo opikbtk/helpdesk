@@ -17,6 +17,18 @@ include 'header.php';
 
 <h1><i class="fa-solid fa-users"></i> Kelola User</h1>
 
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success">
+        <i class="fa-solid fa-circle-check"></i> <?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger">
+        <i class="fa-solid fa-circle-exclamation"></i> <?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
+
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2><i class="fa-solid fa-list"></i> Daftar User</h2>
@@ -48,5 +60,28 @@ include 'header.php';
         </table>
     </div>
 </div>
+
+<style>
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+</style>
 
 <?php include 'footer.php'; ?>
