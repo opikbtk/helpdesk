@@ -1,43 +1,50 @@
 <?php
 $page_title = 'Dashboard';
-// Baris ini nantinya bisa Anda ganti dengan koneksi database asli
-// include '../includes/database.php'; 
 
-// Data dummy untuk demonstrasi
-$total_tickets = 125;
-$open_tickets = 15;
-$pending_tickets = 5;
-$closed_tickets = 105;
+// Koneksi ke database
+include '../includes/database.php'; 
 
-$recent_tickets = [
-    ['id' => 201, 'subject' => 'Tidak bisa login ke aplikasi', 'nama_user' => 'Andi', 'status' => 'open', 'created_at' => '2025-09-29 10:30:00'],
-    ['id' => 200, 'subject' => 'Printer kantor rusak', 'nama_user' => 'Budi', 'status' => 'closed', 'created_at' => '2025-09-28 15:00:00'],
-    ['id' => 199, 'subject' => 'Request software baru', 'nama_user' => 'Citra', 'status' => 'pending', 'created_at' => '2025-09-28 11:45:00'],
-    ['id' => 198, 'subject' => 'Koneksi internet lambat', 'nama_user' => 'Dewi', 'status' => 'closed', 'created_at' => '2025-09-27 09:00:00'],
-];
-
-// Anda bisa menghapus data dummy di atas dan uncomment kode di bawah ini
-// untuk mengambil data dari database asli
-/*
+// Session check
 session_start();
-if ($_SESSION["role"] !== 'admin') {
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !== 'admin') {
     header("Location: ../index.php");
     exit();
 }
 
 // Total Tickets
-$total_tickets = $conn->query("SELECT COUNT(id) as count FROM tickets")->fetch_assoc()['count'];
-$open_tickets = $conn->query("SELECT COUNT(id) as count FROM tickets WHERE status='open'")->fetch_assoc()['count'];
-$pending_tickets = $conn->query("SELECT COUNT(id) as count FROM tickets WHERE status='pending'")->fetch_assoc()['count'];
-$closed_tickets = $conn->query("SELECT COUNT(id) as count FROM tickets WHERE status='closed'")->fetch_assoc()['count'];
+$query_total = "SELECT COUNT(id) as count FROM tickets";
+$result_total = $conn->query($query_total);
+$total_tickets = $result_total->fetch_assoc()['count'];
 
-// Recent Tickets
-$result_recent = $conn->query("SELECT t.*, u.nama AS nama_user FROM tickets t JOIN users u ON t.user_id = u.id ORDER BY t.created_at DESC LIMIT 5");
+// Open Tickets
+$query_open = "SELECT COUNT(id) as count FROM tickets WHERE status='open'";
+$result_open = $conn->query($query_open);
+$open_tickets = $result_open->fetch_assoc()['count'];
+
+// Pending Tickets
+$query_pending = "SELECT COUNT(id) as count FROM tickets WHERE status='pending'";
+$result_pending = $conn->query($query_pending);
+$pending_tickets = $result_pending->fetch_assoc()['count'];
+
+// Closed Tickets
+$query_closed = "SELECT COUNT(id) as count FROM tickets WHERE status='closed'";
+$result_closed = $conn->query($query_closed);
+$closed_tickets = $result_closed->fetch_assoc()['count'];
+
+// Recent Tickets - Ambil 5 tiket terbaru dengan informasi user
+$query_recent = "SELECT t.*, u.nama AS nama_user 
+                 FROM tickets t 
+                 JOIN users u ON t.user_id = u.id 
+                 ORDER BY t.created_at DESC 
+                 LIMIT 5";
+$result_recent = $conn->query($query_recent);
+
 $recent_tickets = [];
-while($row = $result_recent->fetch_assoc()) {
-    $recent_tickets[] = $row;
+if ($result_recent && $result_recent->num_rows > 0) {
+    while($row = $result_recent->fetch_assoc()) {
+        $recent_tickets[] = $row;
+    }
 }
-*/
 
 include 'header.php';
 ?>
