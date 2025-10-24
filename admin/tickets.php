@@ -35,6 +35,18 @@ include 'header.php';
 <h1><i class="fa-solid fa-ticket"></i> Kelola Tiket</h1>
 <p class="subtitle">Lihat, kelola, dan respon semua tiket dukungan pelanggan di sini.</p>
 
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success">
+        <i class="fa-solid fa-circle-check"></i> <?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger">
+        <i class="fa-solid fa-circle-exclamation"></i> <?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
+
 <div class="card">
     <div class="filter-controls">
         <strong><i class="fa-solid fa-filter"></i> Filter Status:</strong>
@@ -78,5 +90,28 @@ include 'header.php';
         </table>
     </div>
 </div>
+
+<style>
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+</style>
 
 <?php include 'footer.php'; ?>
